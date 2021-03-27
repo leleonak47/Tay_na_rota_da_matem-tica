@@ -1,0 +1,1 @@
+# Tay_na_rota_da_matem-tica
