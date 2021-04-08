@@ -181,13 +181,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "1) O jogo decidir\xE1 a ordem de jogadores e se eles ir\xE3o iniciar com
-    MMC ou MDC.\n\n2) Todos os jogadores iniciam com 2 numeros para o calculo.\n\n3)
-    No decorrer do jogo existem algumas casas com informa\xE7\xF5es, que s\xE3o as
-    seguintes:\r\n   - Se o participante cair na casa com MMC, seguir\xE1 jogando
-    com o resultado do MMC;\r\n   - Se o participante cair na casa com MDC seguir\xE1
-    jogando com o resultado do MDC;\r\n   - O participante que cair na casa de valor
-    2 seguir\xE1 jogando com 2 dados.\r\n   - O participante que cair na casa de
-    valor 3 seguir\xE1 jogando com 3 dados.\r\n"
+    MMC ou MDC.\n\n2) Todos os jogadores iniciam com 2 numeros para o calculo do
+    MMD ou MDC.\n\n3) No decorrer do jogo existem algumas casas com informa\xE7\xF5es,
+    que s\xE3o as seguintes:\r\n   - Se o participante cair na casa com MMC, seguir\xE1
+    jogando com o resultado do MMC;\r\n   - Se o participante cair na casa com MDC
+    seguir\xE1 jogando com o resultado do MDC;\r\n   - O participante que cair na
+    casa de valor 2 seguir\xE1 jogando com 2 dados.\r\n   - O participante que cair
+    na casa de valor 3 seguir\xE1 jogando com 3 dados.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -5,21 +5,26 @@ using UnityEngine;
 public class Jogo : MonoBehaviour
 {
     public int casaFinal = 140;
-
     public int quantJogador = 2;
-
     public int jogadorAtual = 0;
-
     public int casasAndadas;
-
     public List<Player> Jogadores;
-
     public bool repete = true;
+    public List<int> casaMMC;
+    public List<int> casaMDC;
+    public List<int> casa2;
+    public List<int> casa3;
 
     // Start is called before the first frame update
     void Start()
     {
+        casaMMC.Clear();
+        casaMDC.Clear();
+        casa2.Clear();
+        casa3.Clear();
+
         casasAndadas = 0;
+        //seleciona ordem jogadores
         foreach (Player item in Jogadores){
             item.SetaOrdemJogadores(quantJogador);
             while (repete){
@@ -46,10 +51,17 @@ public class Jogo : MonoBehaviour
             jogadorAtual = 0;
         }
         else if (Jogadores[jogadorAtual].posicao == casaFinal){
-            jogadorAtual++;
+            //Apresenta tela de vitória
+            //jogadorAtual++;
         }
         else {
             jogadorAtual++;
+        }
+    }
+
+    void GeraCasas(){
+        for (int i = 0; i <7; i++){
+            
         }
     }
 }
