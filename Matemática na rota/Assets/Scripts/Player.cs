@@ -7,8 +7,13 @@ public class Player : MonoBehaviour
     public int posicao = 0;
     public bool mmc;
     public int quantDados;
-
     public List<int> dado;
+    private GameObject anima;
+
+    public Player(GameObject preFab){
+        anima = preFab;
+        Instantiate(anima,Vector3.zero, Quaternion.identity);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -39,5 +44,16 @@ public class Player : MonoBehaviour
 
     public void SetaOrdemJogadores(int dado){
         posicao = Random.Range(1, dado);
+    }
+
+    public void SetaAndando(){
+        
+    }
+    public void SetaParado(){
+
+    }
+
+    public void SetaGanhou(){
+        
     }
 }

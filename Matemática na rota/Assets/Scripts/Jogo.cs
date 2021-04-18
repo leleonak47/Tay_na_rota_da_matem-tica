@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Jogo : MonoBehaviour
 {
+    public List<GameObject> PlayerPrefab;
     public int casaFinal = 140;
     public int quantJogador = 2;
     public int jogadorAtual = 0;
     public int casasAndadas;
     public List<Player> Jogadores;
+    int casa = 0;
     public bool repete = true;
     public List<int> casaMMC;
     public List<int> casaMDC;
@@ -24,18 +26,25 @@ public class Jogo : MonoBehaviour
         casa3.Clear();
 
         casasAndadas = 0;
+
+        Jogadores.Add(new Player(PlayerPrefab[0]));
+        Jogadores.Add(new Player(PlayerPrefab[1]));
+        
         //seleciona ordem jogadores
-        foreach (Player item in Jogadores){
-            item.SetaOrdemJogadores(quantJogador);
-            while (repete){
-                repete = false;
-                for (int j = 0; j < Jogadores.Count; j++){
-                    if (item.posicao == Jogadores[j].posicao){
-                        repete = true;
-                    }
-                }  
-                item.SetaOrdemJogadores(quantJogador);
-            }
+        foreach (Player player in Jogadores){
+            player.posicao = casa;
+            casa++;
+
+            //player.SetaOrdemJogadores(quantJogador);
+            // while (repete){
+            //     repete = false;
+            //     for (int j = 0; j < Jogadores.Count; j++){
+            //         if ((player.posicao == Jogadores[j].posicao) && ()){
+            //             repete = true;
+            //         }
+            //     }  
+            //     player.SetaOrdemJogadores(quantJogador);
+            // }
         }
     }
 
