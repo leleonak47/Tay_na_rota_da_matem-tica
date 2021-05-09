@@ -9,10 +9,12 @@ public class Player : MonoBehaviour
     public int quantDados;
     public List<int> dado;
     private GameObject anima;
+    public string NomePersonagem;
 
-    public Player(GameObject preFab){
+    public Player(GameObject preFab, string Nome){
         anima = preFab;
         Instantiate(anima,Vector3.zero, Quaternion.identity);
+        NomePersonagem = Nome;
     }
 
     // Start is called before the first frame update

@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Calculos : MonoBehaviour
 {
-    public  int quantDados;
+    public TextMeshProUGUI LabelTitulo;
+    public TextMeshProUGUI LabelDados;
+    //public int quantDados;
     public List<int> dados;
     public int resposta;
 
@@ -19,9 +22,9 @@ public class Calculos : MonoBehaviour
     }
 
     // Gera numeros para mdc
-    public void GeraMDC(){
-        GeraDados();
-        if (quantDados == 2){
+    public void GeraMDC()
+    {
+        if (dados.Count == 2){
             resposta = CalculaMDC(dados[0],dados[1]);
         } else {
             resposta = CalculaMDC(dados[0],dados[1],dados[2]);
@@ -29,9 +32,9 @@ public class Calculos : MonoBehaviour
     }
 
     // Gera numeros para MMC
-    public void GeraMMC(){
-        GeraDados();
-        if (quantDados == 2){
+    public void GeraMMC()
+    {
+        if (dados.Count == 2){
             resposta = CalculaMMC(dados[0],dados[1]);
         } else {
             resposta = CalculaMMC(dados[0],dados[1],dados[2]);
@@ -39,10 +42,21 @@ public class Calculos : MonoBehaviour
     }
 
     //gera dados dos jogadores
-    public void GeraDados(){
+    public string GeraDados(int quantDados)
+    {
         for (int i = 0 ; i < quantDados; i++){
             dados.Add(Random.Range(1, 7));
         }
+
+        string txtdados = "";
+
+        for (int i = 0; i < quantDados; i++)
+        {
+            txtdados += " | " + dados[i].ToString();
+        }
+
+        return txtdados += " | ";
+        //LabelDados.SetText(txtdados);
     }
 
     //calculo mdc 2 dados

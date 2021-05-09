@@ -181,8 +181,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "1) O jogo decidir\xE1 a ordem de jogadores e se eles ir\xE3o iniciar com
-    MMC ou MDC.\n2) Todos os jogadores iniciam com 2 numeros para o calculo do MMD
-    ou MDC.\n3) No decorrer do jogo existem algumas casas com informa\xE7\xF5es,
+    MMC ou MDC.\n2) Todos os jogadores iniciam com 2 dados (d6) para o c\xE1lculo
+    do MMC ou MDC.\n3) No decorrer do jogo existem algumas casas com informa\xE7\xF5es,
     que s\xE3o as seguintes:\r\n   - Se o participante cair na casa com MMC, seguir\xE1
     jogando com o resultado do MMC;\r\n   - Se o participante cair na casa com MDC
     seguir\xE1 jogando com o resultado do MDC;\r\n   - O participante que cair na
@@ -459,7 +459,6 @@ GameObject:
   - component: {fileID: 994048034}
   - component: {fileID: 994048033}
   - component: {fileID: 994048032}
-  - component: {fileID: 994048031}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -487,21 +486,6 @@ RectTransform:
   m_AnchoredPosition: {x: 226, y: -146}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &994048031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 994048029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 722fa5a89259b7f4ba129756cbf00ce8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cenaJogo: Menu
-  nomeDaCena: 
-  quantJogador: 0
 --- !u!114 &994048032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,9 +544,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 994048031}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: Sair
+      - m_Target: {fileID: 1866133874724088701, guid: 880846c8b02b47a469cce452dd4d7ad5, type: 3}
+        m_TargetAssemblyTypeName: MudarCena, Assembly-CSharp
+        m_MethodName: MudarParaMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -622,7 +606,7 @@ GameObject:
   - component: {fileID: 1071241415}
   - component: {fileID: 1071241414}
   m_Layer: 5
-  m_Name: Fundo
+  m_Name: Regras
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

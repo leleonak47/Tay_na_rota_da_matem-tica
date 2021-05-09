@@ -1,29 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MudarCena : MonoBehaviour
 {
-    public string cenaJogo = "Jogo";
-    public string nomeDaCena;
-    public int quantJogador;
+    public static string cenaJogo = "Jogo";
+    public static string cenaMenu = "Menu";
+    public static string cenaEscolheQuantJogador = "EscolhePlayer";
+    public static string cenaRegras = "Regras";
+    public static string nomeDaCena;
     
-    // Update is called once per frame
-    void Update()
+    public static void Start()
     {
-        //if (Application.loadedLevelName == cenaJogo){
-            //Jogo.quantJogador = quantJogador;
-            //Destroy(gameObject);
-        //}
+
     }
 
-    public void Mudar(){
-        DontDestroyOnLoad(gameObject);
-        SceneManager.LoadScene(nomeDaCena);
+    public void SetaTela(GameObject Ativa, GameObject Desativa1, GameObject Desativa2, GameObject Desativa3, GameObject Desativa4)
+    {
+        Desativa1.SetActive(false);
+        Desativa2.SetActive(false);
+        Desativa3.SetActive(false);
+        Desativa4.SetActive(false);
+        Ativa.SetActive(true);
     }
 
-    public void Sair(){
+    //public static void Mudar(int jogadores){
+    //    SceneManager.LoadScene(cenaJogo);
+    //}
+
+    //public static void MudarParaMenu(){
+    //    SceneManager.LoadScene(cenaMenu);
+    //}
+
+    //public static void MudarParaRegras(){
+    //    SceneManager.LoadScene(cenaRegras);
+    //}
+
+    public static void Sair(){
         Application.Quit();
     }
 }

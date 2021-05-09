@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 133630132}
   - component: {fileID: 133630131}
   m_Layer: 5
-  m_Name: Image
+  m_Name: EscolheQuantJogador
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 974bf8d0dbfe2774ba43b330e4f9782c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 99b11f5e170bae34aa0493aebacddd2c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -396,7 +396,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SAIR
+  m_text: Voltar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -619,7 +619,6 @@ GameObject:
   - component: {fileID: 683141618}
   - component: {fileID: 683141617}
   - component: {fileID: 683141616}
-  - component: {fileID: 683141615}
   - component: {fileID: 683141614}
   m_Layer: 5
   m_Name: 5Play
@@ -645,8 +644,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -81.99999, y: -8.999999}
-  m_SizeDelta: {x: 80, y: 60}
+  m_AnchoredPosition: {x: -0.00000011921, y: 7}
+  m_SizeDelta: {x: 80, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &683141614
 MonoBehaviour:
@@ -663,21 +662,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 4, y: -4}
   m_UseGraphicAlpha: 1
---- !u!114 &683141615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683141612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 722fa5a89259b7f4ba129756cbf00ce8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cenaJogo: Jogo
-  nomeDaCena: Jogo
-  quantJogador: 5
 --- !u!114 &683141616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -721,14 +705,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 683141615}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: ChangeS
-        m_Mode: 1
+      - m_Target: {fileID: 1866133874724088701, guid: 880846c8b02b47a469cce452dd4d7ad5, type: 3}
+        m_TargetAssemblyTypeName: MudarCena, Assembly-CSharp
+        m_MethodName: Mudar
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -983,7 +967,6 @@ GameObject:
   - component: {fileID: 781067653}
   - component: {fileID: 781067652}
   - component: {fileID: 781067651}
-  - component: {fileID: 781067650}
   - component: {fileID: 781067649}
   m_Layer: 5
   m_Name: 4Play
@@ -1009,8 +992,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 151.7, y: 63.999996}
-  m_SizeDelta: {x: 80, y: 60}
+  m_AnchoredPosition: {x: 255, y: 7}
+  m_SizeDelta: {x: 80, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &781067649
 MonoBehaviour:
@@ -1027,21 +1010,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 4, y: -4}
   m_UseGraphicAlpha: 1
---- !u!114 &781067650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 781067647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 722fa5a89259b7f4ba129756cbf00ce8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cenaJogo: Jogo
-  nomeDaCena: Jogo
-  quantJogador: 4
 --- !u!114 &781067651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1085,14 +1053,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 781067650}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: ChangeS
-        m_Mode: 1
+      - m_Target: {fileID: 1866133874724088701, guid: 880846c8b02b47a469cce452dd4d7ad5, type: 3}
+        m_TargetAssemblyTypeName: MudarCena, Assembly-CSharp
+        m_MethodName: Mudar
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1147,7 +1115,6 @@ GameObject:
   - component: {fileID: 990072598}
   - component: {fileID: 990072597}
   - component: {fileID: 990072596}
-  - component: {fileID: 990072595}
   - component: {fileID: 990072594}
   m_Layer: 5
   m_Name: 3Play
@@ -1173,8 +1140,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.1499982, y: 63.999996}
-  m_SizeDelta: {x: 80, y: 60}
+  m_AnchoredPosition: {x: -130, y: 7}
+  m_SizeDelta: {x: 80, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &990072594
 MonoBehaviour:
@@ -1191,21 +1158,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 4, y: -4}
   m_UseGraphicAlpha: 1
---- !u!114 &990072595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 990072592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 722fa5a89259b7f4ba129756cbf00ce8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cenaJogo: Jogo
-  nomeDaCena: Jogo
-  quantJogador: 3
 --- !u!114 &990072596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1249,14 +1201,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 990072595}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: ChangeS
-        m_Mode: 1
+      - m_Target: {fileID: 1866133874724088701, guid: 880846c8b02b47a469cce452dd4d7ad5, type: 3}
+        m_TargetAssemblyTypeName: MudarCena, Assembly-CSharp
+        m_MethodName: Mudar
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1553,8 +1505,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 78.85002, y: -9}
-  m_SizeDelta: {x: 80, y: 60}
+  m_AnchoredPosition: {x: 126, y: 6.9999995}
+  m_SizeDelta: {x: 80, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1199664937
 MonoBehaviour:
@@ -1613,7 +1565,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1199664940}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1866133874724088701, guid: 880846c8b02b47a469cce452dd4d7ad5, type: 3}
+        m_TargetAssemblyTypeName: MudarCena, Assembly-CSharp
+        m_MethodName: Mudar
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1199664940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1932,7 +1896,6 @@ GameObject:
   - component: {fileID: 1625577729}
   - component: {fileID: 1625577728}
   - component: {fileID: 1625577727}
-  - component: {fileID: 1625577731}
   - component: {fileID: 1625577730}
   m_Layer: 5
   m_Name: 2Play
@@ -1958,8 +1921,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -162, y: 64}
-  m_SizeDelta: {x: 80, y: 60}
+  m_AnchoredPosition: {x: -259, y: 6.999999}
+  m_SizeDelta: {x: 80, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1625577727
 MonoBehaviour:
@@ -2004,14 +1967,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1625577731}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: ChangeS
-        m_Mode: 1
+      - m_Target: {fileID: 1866133874724088701, guid: 880846c8b02b47a469cce452dd4d7ad5, type: 3}
+        m_TargetAssemblyTypeName: MudarCena, Assembly-CSharp
+        m_MethodName: Mudar
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2069,21 +2032,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 4, y: -4}
   m_UseGraphicAlpha: 1
---- !u!114 &1625577731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1625577725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 722fa5a89259b7f4ba129756cbf00ce8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cenaJogo: Jogo
-  nomeDaCena: Jogo
-  quantJogador: 2
 --- !u!1 &1645848769
 GameObject:
   m_ObjectHideFlags: 0
@@ -2195,10 +2143,9 @@ GameObject:
   - component: {fileID: 2001529989}
   - component: {fileID: 2001529988}
   - component: {fileID: 2001529987}
-  - component: {fileID: 2001529986}
   - component: {fileID: 2001529985}
   m_Layer: 5
-  m_Name: Sair
+  m_Name: Voltar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2221,8 +2168,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5, y: -106}
-  m_SizeDelta: {x: 400, y: 70}
+  m_AnchoredPosition: {x: -1.9999, y: -145}
+  m_SizeDelta: {x: 593.99963, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2001529985
 MonoBehaviour:
@@ -2239,21 +2186,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 4, y: -4}
   m_UseGraphicAlpha: 1
---- !u!114 &2001529986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2001529983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 722fa5a89259b7f4ba129756cbf00ce8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cenaJogo: Jogo
-  nomeDaCena: 
-  quantJogador: 0
 --- !u!114 &2001529987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2297,9 +2229,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2001529986}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: Sair
+      - m_Target: {fileID: 1866133874724088701, guid: 880846c8b02b47a469cce452dd4d7ad5, type: 3}
+        m_TargetAssemblyTypeName: MudarCena, Assembly-CSharp
+        m_MethodName: MudarParaMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
