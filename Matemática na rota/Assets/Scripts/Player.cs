@@ -2,34 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player
 {
-    public int posicao = 0;
+    public int posicao;
+    public int casa;
     public bool mmc;
     public int quantDados;
-    public List<int> dado;
-    private GameObject anima;
+    public GameObject anima;
     public string NomePersonagem;
 
-    public Player(GameObject preFab, string Nome){
+    public Player(GameObject preFab, string Nome)
+    {
         anima = preFab;
-        Instantiate(anima,Vector3.zero, Quaternion.identity);
         NomePersonagem = Nome;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //mmc = (Random.value > 0.5f);
-        mmc = (Random.Range(0, 2) == 0);
+        mmc = (UnityEngine.Random.Range(0, 1) == 0);
         quantDados = 2;
-        dado.Clear();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        casa = 0;
     }
 
     public void ViraMMC(){

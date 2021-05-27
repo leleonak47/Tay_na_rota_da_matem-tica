@@ -1,24 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Calculos : MonoBehaviour
+public class Calculos
 {
-    public TextMeshProUGUI LabelTitulo;
-    public TextMeshProUGUI LabelDados;
-    //public int quantDados;
     public List<int> dados;
     public int resposta;
 
-    // Start is called before the first frame update
-    void Start(){
-        dados.Clear();
+    public Calculos()
+    {
+        dados = new List<int>();
     }
 
-    // Update is called once per frame
-    void Update(){
-        
+    // Start is called before the first frame update
+    public void LimpaDados(){
+        dados.Clear();
     }
 
     // Gera numeros para mdc
@@ -44,6 +39,8 @@ public class Calculos : MonoBehaviour
     //gera dados dos jogadores
     public string GeraDados(int quantDados)
     {
+        LimpaDados();
+
         for (int i = 0 ; i < quantDados; i++){
             dados.Add(Random.Range(1, 7));
         }
@@ -56,7 +53,6 @@ public class Calculos : MonoBehaviour
         }
 
         return txtdados += " | ";
-        //LabelDados.SetText(txtdados);
     }
 
     //calculo mdc 2 dados

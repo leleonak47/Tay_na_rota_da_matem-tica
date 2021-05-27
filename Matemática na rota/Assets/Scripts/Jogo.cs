@@ -1,14 +1,17 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class Jogo : MonoBehaviour
 {
     public TextMeshProUGUI LabelNomeJogador;
     public TextMeshProUGUI LabelCasaJogador;
     public TextMeshProUGUI DadosRolados;
+    public TextMeshProUGUI InputResposta;
+    public TextMeshProUGUI LabelTituloCalculo;
+    public TextMeshProUGUI LabelDadosCalculo;
 
     public GameObject Modal;
     public GameObject Tabuleiro; //Jogo
@@ -16,7 +19,6 @@ public class Jogo : MonoBehaviour
     public GameObject Regras;
     public GameObject MenuInicial;
 
-    public MudarCena mudarCena;
     public Calculos calculosModal;
 
     public List<GameObject> PlayerPrefab;
@@ -35,8 +37,9 @@ public class Jogo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mudarCena = new MudarCena();
-        mudarCena.SetaTela(MenuInicial, Modal, Tabuleiro, EscolherQuantJogador, Regras);
+        Jogadores = new List<Player>();
+        calculosModal = new Calculos();
+        MudarCena.SetaTela(MenuInicial, Modal, Tabuleiro, EscolherQuantJogador, Regras);
     }
     public void setTabuleiro()
     {
@@ -51,33 +54,44 @@ public class Jogo : MonoBehaviour
         for (int i =0; i < quantJogador; i++)
         {
             if (i==0)
-                Jogadores.Add(new Player(PlayerPrefab[0], "Tay"));
+                Jogadores.Add(NewPlayer(PlayerPrefab[0], "Tay"));
             else if (i == 1)
-                Jogadores.Add(new Player(PlayerPrefab[0], "Érebo"));
+                Jogadores.Add(NewPlayer(PlayerPrefab[0], "Érebo"));
             else if (i == 2)
-                Jogadores.Add(new Player(PlayerPrefab[0], "Hank"));
+                Jogadores.Add(NewPlayer(PlayerPrefab[0], "Hank"));
             else if (i == 3)
-                Jogadores.Add(new Player(PlayerPrefab[0], "Oscar"));
+                Jogadores.Add(NewPlayer(PlayerPrefab[0], "Oscar"));
             else if (i == 4)
-                Jogadores.Add(new Player(PlayerPrefab[0], "Renato"));
+                Jogadores.Add(NewPlayer(PlayerPrefab[0], "Renato"));
             else
-                Jogadores.Add(new Player(PlayerPrefab[0], "Poul"));
-
+                Jogadores.Add(NewPlayer(PlayerPrefab[0], "Poul"));
         }
-        
         
         //seleciona ordem jogadores
         foreach (Player player in Jogadores){
             player.posicao = ordem;
             ordem++;
         }
+
+        DesabilitaTodosAnima();
+
+        AtivaJogadorAtual();
+
+        LabelNomeJogador.SetText(Jogadores[jogadorAtual].NomePersonagem);
+        LabelCasaJogador.SetText(Jogadores[jogadorAtual].casa.ToString());
     }
 
-    // Update is called once per frame
-    void Update()
+    void DesabilitaTodosAnima()
     {
-        //casasAndadas = 0;
-        //AtualizaJogadorAtual();
+        foreach (Player player in Jogadores)
+        {
+            player.anima.SetActive(false);
+        }
+    }
+
+    void AtivaJogadorAtual()
+    {
+        Jogadores[jogadorAtual].anima.SetActive(true);
     }
 
     void AtualizaJogadorAtual(){
@@ -97,7 +111,7 @@ public class Jogo : MonoBehaviour
         casasAndadas = 0;
 
         LabelNomeJogador.SetText(Jogadores[jogadorAtual].NomePersonagem);
-        LabelCasaJogador.SetText(Jogadores[jogadorAtual].posicao.ToString());
+        LabelCasaJogador.SetText(Jogadores[jogadorAtual].casa.ToString());
 }
 
     void GeraCasas(){
@@ -109,32 +123,36 @@ public class Jogo : MonoBehaviour
     public void SetQuantidadeJogadores (int quant)
     {
         quantJogador = quant;
-        mudarCena.SetaTela(Tabuleiro, Regras, MenuInicial, Modal, EscolherQuantJogador);
+        MudarCena.SetaTela(Tabuleiro, Regras, MenuInicial, Modal, EscolherQuantJogador);
 
         setTabuleiro();
     }
 
     public void SetRegras()
     {
-        mudarCena.SetaTela(Regras, MenuInicial, Modal, Tabuleiro, EscolherQuantJogador);
+        MudarCena.SetaTela(Regras, MenuInicial, Modal, Tabuleiro, EscolherQuantJogador);
     }
 
     public void SetJogadores()
     {
-        mudarCena.SetaTela(EscolherQuantJogador, Regras, MenuInicial, Modal, Tabuleiro);
+        MudarCena.SetaTela(EscolherQuantJogador, Regras, MenuInicial, Modal, Tabuleiro);
     }
 
     public void SetMenu()
     {
-        mudarCena.SetaTela(MenuInicial, EscolherQuantJogador, Regras, Modal, Tabuleiro);
+        MudarCena.SetaTela(MenuInicial, EscolherQuantJogador, Regras, Modal, Tabuleiro);
+    }
+
+    public static void Sair()
+    {
+        Application.Quit();
     }
 
     public void SetCalculoModal()
     {
-        mudarCena.SetaTela(Modal, MenuInicial, EscolherQuantJogador, Regras, Tabuleiro);
+        DesabilitaTodosAnima();
+        MudarCena.SetaTela(Modal, MenuInicial, EscolherQuantJogador, Regras, Tabuleiro);
         string teste = calculosModal.GeraDados(Jogadores[jogadorAtual].quantDados);
-
-        Console.WriteLine(teste);
         DadosRolados.SetText(teste);
 
         if (Jogadores[jogadorAtual].mmc)
@@ -149,8 +167,26 @@ public class Jogo : MonoBehaviour
 
     public void RetornaParaTabuleiro()
     {
-        mudarCena.SetaTela(Tabuleiro, Regras, MenuInicial, Modal, EscolherQuantJogador);
+        MudarCena.SetaTela(Tabuleiro, Regras, MenuInicial, Modal, EscolherQuantJogador);
+        AtivaJogadorAtual();
 
-        //Atualiza dados dos jogadores e avança para o procimo.
+        print("quantJogador = " + jogadorAtual);
+
+        StartCoroutine(EsperaSegundos(2000.0f));
+
+        AtualizaJogadorAtual();
+        print("quantJogador = " + jogadorAtual);
+    }
+
+    IEnumerator EsperaSegundos(float num)
+    {
+        yield return new WaitForSeconds(num);
+    }
+
+    public Player NewPlayer(GameObject preFab, string Nome)
+    {
+        GameObject go = Instantiate(preFab, Vector3.zero, Quaternion.identity);
+        Player component = new Player(go, Nome);
+        return component;
     }
 }
