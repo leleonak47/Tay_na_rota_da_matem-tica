@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System.Text.RegularExpressions;
 
 public class Jogo : MonoBehaviour
 {
     public TextMeshProUGUI LabelNomeJogador;
     public TextMeshProUGUI LabelCasaJogador;
+    public TextMeshProUGUI TituloModalDados;
     public TextMeshProUGUI DadosRolados;
-    public TextMeshProUGUI InputResposta;
-    public TextMeshProUGUI LabelTituloCalculo;
-    public TextMeshProUGUI LabelDadosCalculo;
+    public TMP_InputField InputResposta;
+    public GameObject BtnJogaDados;
+    public GameObject LabelVitoria;
 
     public GameObject Modal;
     public GameObject Tabuleiro; //Jogo
@@ -22,17 +24,18 @@ public class Jogo : MonoBehaviour
     public Calculos calculosModal;
 
     public List<GameObject> PlayerPrefab;
-    public int casaFinal = 140;
+    public int casaFinal;
     public int quantJogador;
     public int jogadorAtual = 0;
     public int casasAndadas;
     public List<Player> Jogadores;
     int ordem = 0;
     public bool repete = true;
-    public List<int> casaMMC;
-    public List<int> casaMDC;
-    public List<int> casa2;
-    public List<int> casa3;
+    private bool ganhou = false;
+    private List<int> casaMMC = new List<int>() { 5,17,25,28,31,55,61,66,75,87,92,95,100,106,113,131,135,140};      //troca para mmc
+    private List<int> casaMDC = new List<int>() { 6,18,24,27,30,56,60,67,76,86,91,94,99,105,112,130,134,139};       //troca para mdc
+    private List<int> casa2dados = new List<int>() { 7,20,29,35,40,97,109,116,122};                                //passa a jogar 2 dados
+    private List<int> casa3dados = new List<int>() { 3,14,26,33,37,39,41,52,59,62,68,80,84,103,127,132,136};       //passa a jogar 3 dados
 
     // Start is called before the first frame update
     void Start()
@@ -43,11 +46,15 @@ public class Jogo : MonoBehaviour
     }
     public void setTabuleiro()
     {
+        if (LabelVitoria.active)
+        { LabelVitoria.SetActive(false); }
+
+        if (!BtnJogaDados.active)
+        { BtnJogaDados.SetActive(true); }
+
+        casaFinal = 10; //142;
         Modal.SetActive(false);
-        casaMMC.Clear();
-        casaMDC.Clear();
-        casa2.Clear();
-        casa3.Clear();
+        ganhou = false;
 
         casasAndadas = 0;
 
@@ -58,7 +65,7 @@ public class Jogo : MonoBehaviour
             else if (i == 1)
                 Jogadores.Add(NewPlayer(PlayerPrefab[0], "Érebo"));
             else if (i == 2)
-                Jogadores.Add(NewPlayer(PlayerPrefab[0], "Hank"));
+                Jogadores.Add(NewPlayer(PlayerPrefab[0], "Toshinori"));
             else if (i == 3)
                 Jogadores.Add(NewPlayer(PlayerPrefab[0], "Oscar"));
             else if (i == 4)
@@ -79,6 +86,7 @@ public class Jogo : MonoBehaviour
 
         LabelNomeJogador.SetText(Jogadores[jogadorAtual].NomePersonagem);
         LabelCasaJogador.SetText(Jogadores[jogadorAtual].casa.ToString());
+
     }
 
     void DesabilitaTodosAnima()
@@ -95,24 +103,33 @@ public class Jogo : MonoBehaviour
     }
 
     void AtualizaJogadorAtual(){
-        if (jogadorAtual >= (quantJogador-1)){
-            jogadorAtual = 0;
-        }
-        else {
-            jogadorAtual++;
-        }
-
-        if (Jogadores[jogadorAtual].posicao == casaFinal)
+        print("posicao "+ Jogadores[jogadorAtual].casa +" e casa final "+ casaFinal);
+        if (Jogadores[jogadorAtual].casa >= casaFinal)
         {
-            //Apresenta tela de vitória
-            //jogadorAtual++;
+            Jogadores[jogadorAtual].anima.GetComponent<Animator>().SetBool("ganhou", true);
+            LabelVitoria.SetActive(true);
+            BtnJogaDados.SetActive(false);
+
+            ganhou = true;
         }
+        else
+        {
+            if (jogadorAtual >= (quantJogador - 1))
+            {
+                jogadorAtual = 0;
+            }
+            else
+            {
+                jogadorAtual++;
+            }
 
-        casasAndadas = 0;
+            casasAndadas = 0;
 
-        LabelNomeJogador.SetText(Jogadores[jogadorAtual].NomePersonagem);
-        LabelCasaJogador.SetText(Jogadores[jogadorAtual].casa.ToString());
-}
+            LabelNomeJogador.SetText(Jogadores[jogadorAtual].NomePersonagem);
+            LabelCasaJogador.SetText(Jogadores[jogadorAtual].casa.ToString());
+        }
+        
+    }
 
     void GeraCasas(){
         for (int i = 0; i <7; i++){
@@ -140,6 +157,14 @@ public class Jogo : MonoBehaviour
 
     public void SetMenu()
     {
+        foreach ( Player item in Jogadores)
+        {
+            if (item.anima != null)
+                Destroy(item.anima);
+        }
+
+        Jogadores.Clear();
+
         MudarCena.SetaTela(MenuInicial, EscolherQuantJogador, Regras, Modal, Tabuleiro);
     }
 
@@ -152,35 +177,93 @@ public class Jogo : MonoBehaviour
     {
         DesabilitaTodosAnima();
         MudarCena.SetaTela(Modal, MenuInicial, EscolherQuantJogador, Regras, Tabuleiro);
-        string teste = calculosModal.GeraDados(Jogadores[jogadorAtual].quantDados);
-        DadosRolados.SetText(teste);
+
+        DadosRolados.SetText(calculosModal.GeraDados(Jogadores[jogadorAtual].quantDados));
 
         if (Jogadores[jogadorAtual].mmc)
         {
+            TituloModalDados.SetText("Faça o MMC");
             calculosModal.GeraMMC();
         }
         else
         {
+            TituloModalDados.SetText("Faça o MDC");
             calculosModal.GeraMDC();
         }
+        print(calculosModal.resposta);
     }
 
     public void RetornaParaTabuleiro()
     {
-        MudarCena.SetaTela(Tabuleiro, Regras, MenuInicial, Modal, EscolherQuantJogador);
-        AtivaJogadorAtual();
+        if ((string.IsNullOrEmpty(InputResposta.text)) || (!Regex.IsMatch(InputResposta.text, @"^[0-9]+$") ))
+        {
+            if (!DadosRolados.text.Contains("Tente novamente \n"))
+            {
+                string msg = DadosRolados.text;
+                msg = "Tente novamente \n" + msg;
+                DadosRolados.SetText(msg);
+            }
+        }
+        else
+        if (Convert.ToInt32(InputResposta.text) == calculosModal.resposta)
+        {
 
-        print("quantJogador = " + jogadorAtual);
+            BtnJogaDados.SetActive(false);
 
-        StartCoroutine(EsperaSegundos(2000.0f));
+            MudarCena.SetaTela(Tabuleiro, Regras, MenuInicial, Modal, EscolherQuantJogador);
 
-        AtualizaJogadorAtual();
-        print("quantJogador = " + jogadorAtual);
+            AtivaJogadorAtual();
+
+            Jogadores[jogadorAtual].anima.GetComponent<Animator>().SetBool("parado", false);
+
+            Jogadores[jogadorAtual].casa += calculosModal.resposta;
+
+            VerificaMudancaNacasaEDados();
+
+            LabelCasaJogador.SetText(Jogadores[jogadorAtual].casa.ToString());
+
+            InputResposta.SetTextWithoutNotify("");
+
+            StartCoroutine(TrocaJogadorAposNsec(2.0f));
+        }
+        else
+        {
+            if (!DadosRolados.text.Contains("Tente novamente"))
+            {
+                string msg = DadosRolados.text;
+                msg = "Tente novamente \n" + msg;
+                DadosRolados.SetText(msg);
+            }
+        }
     }
 
-    IEnumerator EsperaSegundos(float num)
+    IEnumerator TrocaJogadorAposNsec(float num)
     {
         yield return new WaitForSeconds(num);
+        Jogadores[jogadorAtual].anima.GetComponent<Animator>().SetBool("parado", true);
+        AtualizaJogadorAtual();
+        if (!ganhou)
+            BtnJogaDados.SetActive(true);
+    }
+
+    private void VerificaMudancaNacasaEDados()
+    {
+        if (casaMMC.Contains(Jogadores[jogadorAtual].casa))
+        {
+            Jogadores[jogadorAtual].ViraMMC();
+        }
+        else if (casaMDC.Contains(Jogadores[jogadorAtual].casa))
+        {
+            Jogadores[jogadorAtual].ViraMDC();
+        }
+        else if (casa2dados.Contains(Jogadores[jogadorAtual].casa))
+        {
+            Jogadores[jogadorAtual].Vira2Dados();
+        }
+        else if (casa3dados.Contains(Jogadores[jogadorAtual].casa))
+        {
+            Jogadores[jogadorAtual].Vira3Dados();
+        }
     }
 
     public Player NewPlayer(GameObject preFab, string Nome)

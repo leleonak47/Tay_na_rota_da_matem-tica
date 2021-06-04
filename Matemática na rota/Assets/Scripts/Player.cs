@@ -28,22 +28,21 @@ public class Player
         mmc = false;
     }
 
+    public void Vira2Dados()
+    {
+        quantDados = 2;
+    }
+
+    public void Vira3Dados()
+    {
+        quantDados = 3;
+    }
+
     public int RolaDado(){
         return Random.Range(1, 7);
     }
 
     public void SetaOrdemJogadores(int dado){
         posicao = Random.Range(1, dado);
-    }
-
-    public void SetaAndando(){
-        
-    }
-    public void SetaParado(){
-
-    }
-
-    public void SetaGanhou(){
-        
     }
 }
