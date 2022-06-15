@@ -20,6 +20,7 @@ public class Jogo : MonoBehaviour
     public GameObject EscolherQuantJogador;
     public GameObject Regras;
     public GameObject MenuInicial;
+    public GameObject ResponderErrado;
 
     public Calculos calculosModal;
 
@@ -28,6 +29,7 @@ public class Jogo : MonoBehaviour
     public int quantJogador;
     public int jogadorAtual = 0;
     public int casasAndadas;
+    public int contaParaApresentarResultado;
     public List<Player> Jogadores;
     int ordem = 0;
     public bool repete = true;
@@ -44,6 +46,7 @@ public class Jogo : MonoBehaviour
         calculosModal = new Calculos();
         MudarCena.SetaTela(MenuInicial, Modal, Tabuleiro, EscolherQuantJogador, Regras);
     }
+
     public void setTabuleiro()
     {
         if (LabelVitoria.active)
@@ -52,11 +55,12 @@ public class Jogo : MonoBehaviour
         if (!BtnJogaDados.active)
         { BtnJogaDados.SetActive(true); }
 
-        casaFinal = 10; //142;
+        casaFinal = /*10; //*/142;
         Modal.SetActive(false);
         ganhou = false;
 
         casasAndadas = 0;
+        contaParaApresentarResultado = 0;
 
         for (int i =0; i < quantJogador; i++)
         {
@@ -67,7 +71,7 @@ public class Jogo : MonoBehaviour
             else if (i == 2)
                 Jogadores.Add(NewPlayer(PlayerPrefab[0], "Toshinori"));
             else if (i == 3)
-                Jogadores.Add(NewPlayer(PlayerPrefab[0], "Oscar"));
+                Jogadores.Add(NewPlayer(PlayerPrefab[0], "Hikaru"));
             else if (i == 4)
                 Jogadores.Add(NewPlayer(PlayerPrefab[0], "Renato"));
             else
@@ -131,11 +135,11 @@ public class Jogo : MonoBehaviour
         
     }
 
-    void GeraCasas(){
-        for (int i = 0; i <7; i++){
+    //void GeraCasas(){
+    //    for (int i = 0; i <7; i++){
             
-        }
-    }
+    //    }
+    //}
 
     public void SetQuantidadeJogadores (int quant)
     {
@@ -191,6 +195,33 @@ public class Jogo : MonoBehaviour
             calculosModal.GeraMDC();
         }
         print(calculosModal.resposta);
+
+        ResponderErrado.SetActive(false);
+    }
+
+    public void RetornaParaTabuleiroErro()
+    {
+        BtnJogaDados.SetActive(false);
+
+        MudarCena.SetaTela(Tabuleiro, Regras, MenuInicial, Modal, EscolherQuantJogador);
+
+        AtivaJogadorAtual();
+
+        Jogadores[jogadorAtual].anima.GetComponent<Animator>().SetBool("parado", false);
+
+        Jogadores[jogadorAtual].casa += Convert.ToInt32(calculosModal.resposta / 2);
+
+        VerificaMudancaNacasaEDados();
+
+        LabelCasaJogador.SetText(Jogadores[jogadorAtual].casa.ToString());
+
+        InputResposta.SetTextWithoutNotify("");
+
+        StartCoroutine(TrocaJogadorAposNsec(2.0f));
+
+        contaParaApresentarResultado = 0;
+
+        ResponderErrado.SetActive(false);
     }
 
     public void RetornaParaTabuleiro()
@@ -203,9 +234,17 @@ public class Jogo : MonoBehaviour
                 msg = "Tente novamente \n" + msg;
                 DadosRolados.SetText(msg);
             }
+
+            if (contaParaApresentarResultado < 2)
+            {
+                contaParaApresentarResultado++;
+            }
+            else
+            {
+                ResponderErrado.SetActive(true);
+            }
         }
-        else
-        if (Convert.ToInt32(InputResposta.text) == calculosModal.resposta)
+        else if (Convert.ToInt32(InputResposta.text) == calculosModal.resposta)
         {
 
             BtnJogaDados.SetActive(false);
@@ -225,6 +264,10 @@ public class Jogo : MonoBehaviour
             InputResposta.SetTextWithoutNotify("");
 
             StartCoroutine(TrocaJogadorAposNsec(2.0f));
+
+            contaParaApresentarResultado = 0;
+
+            ResponderErrado.SetActive(false);
         }
         else
         {
@@ -233,6 +276,15 @@ public class Jogo : MonoBehaviour
                 string msg = DadosRolados.text;
                 msg = "Tente novamente \n" + msg;
                 DadosRolados.SetText(msg);
+            }
+
+            if (contaParaApresentarResultado < 2)
+            {
+                contaParaApresentarResultado++;
+            }
+            else
+            {
+                ResponderErrado.SetActive(true);
             }
         }
     }
